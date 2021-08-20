@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardHeader } from '@material-ui/core'
 import { connect } from 'react-redux';
+import { deleteContactAction } from '../actions/contacts.actions'
 
 const ContactList = (props) => {
     console.log(props);
@@ -13,7 +14,7 @@ const ContactList = (props) => {
                             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                                 <div>{contact.name}</div>
                                 <div>{contact.phoneNumber}</div>
-                                <Button variant="contained" color="secondary">Delete</Button>
+                                <Button variant="contained" color="secondary" onClick={() => props.deleteContactAction(index)}>Delete</Button>
                             </div>
                         </CardContent>
                     </Card>
@@ -29,4 +30,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(ContactList);
+export default connect(mapStateToProps, { deleteContactAction })(ContactList);

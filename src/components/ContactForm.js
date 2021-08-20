@@ -1,5 +1,6 @@
 import { Button, Card, CardActions, CardContent, CardHeader, TextField } from '@material-ui/core';
 import { connect } from 'react-redux';
+import { addContactAction, updateNameAction, updateNumberAction } from '../actions/contacts.actions'
 
 const ContactForm = (props) => {
     console.log(props);
@@ -7,11 +8,20 @@ const ContactForm = (props) => {
         <Card>
             <CardHeader title="Add Contact" />
             <CardContent>
-                <TextField style={{ width: '100%', marginBottom: '10px' }} variant="outlined" label="Name" value={props.currentContact.name} />
-                <TextField style={{ width: '100%' }} variant="outlined" label="Number" value={props.currentContact.phoneNumber} />
+                <TextField 
+                    style={{ width: '100%', marginBottom: '10px' }} 
+                    variant="outlined" label="Name" 
+                    value={props.currentContact.name} 
+                    onChange={(e) => props.updateNameAction(e.target.value)} />
+                <TextField 
+                    style={{ width: '100%' }} 
+                    variant="outlined" 
+                    label="Number" 
+                    value={props.currentContact.phoneNumber} 
+                    onChange={(e) => props.updateNumberAction(e.target.value)} />
             </CardContent>
             <CardActions style={{display: 'flex', justifyContent: 'flex-end'}}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={() => props.addContactAction()}>
                     Submit
                 </Button>
             </CardActions>
@@ -25,4 +35,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {})(ContactForm);
+export default connect(mapStateToProps, { addContactAction, updateNameAction, updateNumberAction })(ContactForm);
