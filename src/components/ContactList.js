@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from '@material-ui/core'
+import { Button, Card, CardContent, CardHeader } from '@material-ui/core'
 import { connect } from 'react-redux';
 
 const ContactList = (props) => {
@@ -7,7 +7,17 @@ const ContactList = (props) => {
         <Card>
             <CardHeader title="Contacts"/>
             <CardContent>
-                stuff
+                {props.contacts.map((contact, index) => (
+                    <Card key={index}>
+                        <CardContent>
+                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <div>{contact.name}</div>
+                                <div>{contact.phoneNumber}</div>
+                                <Button variant="contained" color="secondary">Delete</Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+                ))}
             </CardContent>
         </Card>
     );
